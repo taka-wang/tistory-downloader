@@ -127,53 +127,6 @@ def download_images(url, items_info=None, output_folder='images'):
     except requests.exceptions.RequestException as e:
         print(f"Error: {e}")
 
-# def download_images(url, items_info=None, output_folder='images'):
-#     """
-#     Downloads images from a given URL and saves them to the specified output folder.
-
-#     Parameters:
-#     - url (str): The URL of the webpage containing images.
-#     - items_info (list): List of dictionaries containing 'url' and 'date' for each entry (default: None).
-#     - output_folder (str): The folder to save downloaded images (default: 'images').
-
-#     Returns:
-#     - None
-#     """
-#     try:
-#         response = requests.get(url)
-#         response.raise_for_status()
-#         html_code = response.text
-
-#         soup = BeautifulSoup(html_code, 'html.parser')
-#         figure_tags = soup.find_all('figure', class_='imageblock')
-
-#         if not os.path.exists(output_folder):
-#             os.makedirs(output_folder)
-
-#         index = extract_index_from_url(url)
-#         post_date = None
-
-#         if items_info:
-#             for item in items_info:
-#                 if item['url'] == url:
-#                     post_date = item['date']
-#                     break
-
-#         if post_date is None:
-#             # If items_info is not provided or URL not found, use current date
-#             post_date = datetime.now(pytz.UTC)
-
-#         for i, figure_tag in enumerate(figure_tags, 1):
-#             image_url = figure_tag.find('span', attrs={'data-url': True}).get('data-url')
-#             image_path = os.path.join(output_folder, generate_filename(image_url, post_date, index, i))
-
-#             urlretrieve(image_url, image_path)
-#             print(f"Downloaded: {image_path}")
-
-#     except requests.exceptions.RequestException as e:
-#         print(f"Error: {e}")
-
-
 def extract_index_from_url(url):
     """
     Extracts the index from a URL.
